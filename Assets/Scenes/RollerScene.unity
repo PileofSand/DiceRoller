@@ -1106,6 +1106,11 @@ PrefabInstance:
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 534669904}
+    - target: {fileID: 2743854184895599238, guid: 8568cdcc79af640419086595f206aea5,
+        type: 3}
+      propertyPath: _mouseDragPhysicsSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3478025468032783535, guid: 8568cdcc79af640419086595f206aea5,
         type: 3}
       propertyPath: textPrefab

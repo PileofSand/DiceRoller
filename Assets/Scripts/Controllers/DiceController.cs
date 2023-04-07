@@ -7,8 +7,6 @@ public class DiceController : MonoBehaviour
     #region VARIABLES
     [SerializeField]
     private Camera _mainCamera;
-    [SerializeField, Tooltip("Speed multiplier for releasing the dice")]
-    private float _mouseDragPhysicsSpeed = 10;
     [SerializeField, Tooltip("Speed multiplier for the dragging, used on object.")]
     private float _mouseDragSpeed = 0.5f;
     [SerializeField, Tooltip("Height of dice when picking it up")]
@@ -18,7 +16,7 @@ public class DiceController : MonoBehaviour
     private Vector3 m_velocity;
     private Plane _plane;
     private bool m_isDragging;
-    private Vector3 m_directionNormalized;
+    private Vector3 m_throwVelocity;
 
     #endregion
 
@@ -41,7 +39,7 @@ public class DiceController : MonoBehaviour
         if (_plane.Raycast(ray, out float initialDistance))
         {
             Vector3 dragPosition = ray.GetPoint(initialDistance);
-            m_directionNormalized = (dragPosition - transform.position).normalized;
+            m_throwVelocity = (dragPosition - transform.position);
             transform.position = Vector3.SmoothDamp(transform.position, dragPosition, ref m_velocity, _mouseDragSpeed);
         }
     }
@@ -50,7 +48,7 @@ public class DiceController : MonoBehaviour
     {
         m_isDragging = false;
         _rigidbody.useGravity = true;
-        _rigidbody.velocity = m_directionNormalized * _mouseDragPhysicsSpeed;
+        _rigidbody.velocity = m_throwVelocity;
     }
 
     private void OnMouseDown()
