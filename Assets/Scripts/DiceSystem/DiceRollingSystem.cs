@@ -1,12 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Random = UnityEngine.Random;
 
 namespace DiceRoller
 {
     public class DiceRollingSystem : MonoBehaviour
     {
+        #region ACTIONS
+        public Action<int> OnRollFinished;
+        public Action OnRollStarted;
+        #endregion
+
         #region VARIABLES
         [SerializeField]
         private Dice _dice;
@@ -64,12 +71,49 @@ namespace DiceRoller
         }
         #endregion
 
+        #region PUBLIC_METHODS
+        public void FakeRollDice(float forceMagnitude)
+        {
+            Vector3 Direction = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1f), Random.Range(-1f, 1f)).normalized;
+            // Apply the force to the die's Rigidbody component
+            _dice.Rigidbody.velocity = Direction * forceMagnitude;
+            StartCoroutine(WaitForDiceToStop());
+            OnRollStarted?.Invoke();
+        }
+        #endregion
+
         #region PRIVATE_METHODS
+        private IEnumerator WaitForDiceToStop()
+        {
+            while (_dice.Rigidbody.velocity.magnitude > 0f && !_dice.IsDragged)
+            {
+                yield return null;
+            }
+
+            // Cast a ray downwards from the center of the dice to detect which side is facing up
+            RaycastHit hit;
+            if (Physics.Raycast(_dice.transform.position, Vector3.up, out hit))
+            {
+                // Determine the value of the roll based on the name of the GameObject that was hit
+                var diceSide = hit.collider.gameObject.GetComponent<DiceSide>();
+                if (diceSide)
+                {
+                    Debug.Log("Dice rolled: " + diceSide.SideValue);
+                    OnRollFinished?.Invoke(diceSide.SideValue);
+                }
+                else
+                {
+                    Debug.Log("No Side Detected");
+                }
+            }
+        }
 
         private void DragFinished()
         {
             _dice.Rigidbody.useGravity = true;
             _dice.Rigidbody.velocity = _throwVelocity * _throwAccelerationValue;
+            StartCoroutine(WaitForDiceToStop());
+            OnRollStarted?.Invoke();
         }
 
         private void DragStarted()
