@@ -42,7 +42,7 @@ namespace DiceRoller
             for (int i = 0; i < diceSides.Length; i++)
             {
                 DiceSideData diceSideData = new DiceSideData();
-                diceSideData.sideValue = i + 1;
+                diceSideData.sideValue = (i + 1).ToString();
                 diceSideData.diceSide = diceSides[i];
                 _diceSides.Add(diceSideData);
             }

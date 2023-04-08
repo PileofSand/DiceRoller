@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Globalization;
 
 namespace DiceRoller.UI
 {
@@ -24,14 +25,14 @@ namespace DiceRoller.UI
         private void Start()
         {
             _button.onClick.AddListener(() => SetupRollButton());
-            _diceRollingSystem.OnRollStarted += OnRollStarted;
-            _diceRollingSystem.OnRollFinished += OnRollFinished;
+            _diceRollingSystem.OnRollStarted += RollStarted;
+            _diceRollingSystem.OnRollFinished += RollFinished;
         }
 
         private void OnDestroy()
         {
-            _diceRollingSystem.OnRollStarted -= OnRollStarted;
-            _diceRollingSystem.OnRollFinished -= OnRollFinished;
+            _diceRollingSystem.OnRollStarted -= RollStarted;
+            _diceRollingSystem.OnRollFinished -= RollFinished;
         }
 
         #endregion
@@ -43,15 +44,21 @@ namespace DiceRoller.UI
             _diceRollingSystem.FakeRollDice();
         }
 
-        private void OnRollFinished(int value)
+        private void RollFinished(string value)
         {
-            _sumValue += value;
-            _textField.text = value.ToString();
+            if (value.Contains("."))
+            {
+                value = value.Replace(".", "");
+            }
+
+            int addValue = int.Parse(value);
+            _sumValue += addValue;
+            _textField.text = addValue.ToString();
             _sumTextField.text = _sumValue.ToString();
             _button.interactable = true;
         }
 
-        private void OnRollStarted()
+        private void RollStarted()
         {
             _button.interactable = false;
             _textField.text = "?";

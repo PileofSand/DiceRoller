@@ -5,7 +5,7 @@ namespace DiceRoller
     [Serializable]
     public struct DiceSideData
     {
-        public int sideValue;
+        public string sideValue;
         public DiceSide diceSide;
     }
 }

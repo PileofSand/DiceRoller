@@ -9,7 +9,7 @@ namespace DiceRoller
         [SerializeField]
         private TextMeshPro m_textMesh;
 
-        public int SideValue { get; set; }
+        public string SideValue { get; set; }
 
         #region UNITY_METHODS
         private void Awake()
@@ -19,10 +19,10 @@ namespace DiceRoller
         #endregion
 
         #region PUBLIC_METHODS
-        public void Setup(int value)
+        public void Setup(string value)
         {
             SideValue = value;
-            m_textMesh.text = value.ToString();
+            m_textMesh.text = value;
         }
         #endregion
     }

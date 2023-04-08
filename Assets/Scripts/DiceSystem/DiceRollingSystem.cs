@@ -10,7 +10,7 @@ namespace DiceRoller
     public class DiceRollingSystem : MonoBehaviour
     {
         #region ACTIONS
-        public Action<int> OnRollFinished;
+        public Action<string> OnRollFinished;
         public Action OnRollStarted;
         #endregion
 
@@ -29,11 +29,15 @@ namespace DiceRoller
         private float _pickUpHeight = 0.5f;
         [SerializeField, Tooltip("Speed of picking up dice")]
         private float _pickUpSpeed = 2f;
+        [SerializeField, Tooltip("Bounds for Dice movement on X axis")]
+        private Vector2 _xMovementBounds;
+        [SerializeField, Tooltip("Bounds for Dice movement on Z axis")]
+        private Vector2 _zMovementBounds;
+
 
         private bool _isFakeRolling;
         private Vector3 _velocity;
         private Plane _plane;
-        private Vector3 _throwVelocity;
         #endregion
 
         #region UNITY_METHODS
@@ -68,8 +72,12 @@ namespace DiceRoller
             if (_plane.Raycast(ray, out float initialDistance))
             {
                 Vector3 dragPosition = ray.GetPoint(initialDistance);
-                _throwVelocity = (dragPosition - _dice.transform.position);
-                _dice.transform.position = Vector3.SmoothDamp(_dice.transform.position, dragPosition, ref _velocity, _mouseDragSpeed);
+                Vector3 clampedTargetPos = new Vector3(
+        Mathf.Clamp(dragPosition.x, _xMovementBounds.x, _xMovementBounds.y),
+        _dice.transform.position.y,
+        Mathf.Clamp(dragPosition.z, _zMovementBounds.x, _zMovementBounds.y));
+        
+                _dice.transform.position = Vector3.SmoothDamp(_dice.transform.position, clampedTargetPos, ref _velocity, _mouseDragSpeed);
             }
         }
         #endregion
@@ -108,7 +116,6 @@ namespace DiceRoller
                 var diceSide = hit.collider.gameObject.GetComponent<DiceSide>();
                 if (diceSide)
                 {
-                    Debug.Log("Dice rolled: " + diceSide.SideValue);
                     OnRollFinished?.Invoke(diceSide.SideValue);
                 }
                 else
@@ -121,7 +128,7 @@ namespace DiceRoller
         private void DragFinished()
         {
             _dice.Rigidbody.useGravity = true;
-            _dice.Rigidbody.velocity = _throwVelocity * _throwAccelerationValue;
+            _dice.Rigidbody.velocity = _velocity * _throwAccelerationValue;
             StartCoroutine(WaitForDiceToStop());
             OnRollStarted?.Invoke();
         }
