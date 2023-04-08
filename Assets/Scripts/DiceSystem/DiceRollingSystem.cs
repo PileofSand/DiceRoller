@@ -19,6 +19,8 @@ namespace DiceRoller
         private Dice _dice;
         [SerializeField]
         private Camera _mainCamera;
+        [SerializeField, Tooltip("Force of fake rolling (Button)")]
+        private float _fakeRollForce = 10f;
         [SerializeField, Tooltip("Speed multiplier for the dragging, used on object.")]
         private float _mouseDragSpeed = 0.5f;
         [SerializeField, Tooltip("Value used to boost throw speed, Set to [1] to use realistic physics")]
@@ -28,6 +30,7 @@ namespace DiceRoller
         [SerializeField, Tooltip("Speed of picking up dice")]
         private float _pickUpSpeed = 2f;
 
+        private bool _isFakeRolling;
         private Vector3 _velocity;
         private Plane _plane;
         private Vector3 _throwVelocity;
@@ -72,24 +75,31 @@ namespace DiceRoller
         #endregion
 
         #region PUBLIC_METHODS
-        public void FakeRollDice(float forceMagnitude)
+        public bool FakeRollDice()
         {
+            if (_isFakeRolling)
+            {
+                return _isFakeRolling;
+            }
+
             Vector3 Direction = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1f), Random.Range(-1f, 1f)).normalized;
             // Apply the force to the die's Rigidbody component
-            _dice.Rigidbody.velocity = Direction * forceMagnitude;
+            _dice.Rigidbody.velocity = Direction * _fakeRollForce;
             StartCoroutine(WaitForDiceToStop());
             OnRollStarted?.Invoke();
+            return _isFakeRolling;
         }
         #endregion
 
         #region PRIVATE_METHODS
         private IEnumerator WaitForDiceToStop()
         {
+            _isFakeRolling = true;
             while (_dice.Rigidbody.velocity.magnitude > 0f && !_dice.IsDragged)
             {
                 yield return null;
             }
-
+            _isFakeRolling = false;
             // Cast a ray downwards from the center of the dice to detect which side is facing up
             RaycastHit hit;
             if (Physics.Raycast(_dice.transform.position, Vector3.up, out hit))
