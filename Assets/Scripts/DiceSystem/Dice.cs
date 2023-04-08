@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Random = UnityEngine.Random;
 
 namespace DiceRoller
 {
@@ -13,6 +14,7 @@ namespace DiceRoller
         #region ACTIONS
         public Action OnDragStarted;
         public Action OnDragFinished;
+        public Action<int> OnRollFinished;
         #endregion
 
         #region VARIABLES
@@ -41,8 +43,7 @@ namespace DiceRoller
         private void OnMouseUp()
         {
             _isDragged = false;
-            OnDragFinished?.Invoke();
-            StartCoroutine(WaitForDiceToStop());
+            RollDice();
         }
 
         private void OnMouseDown()
@@ -53,6 +54,13 @@ namespace DiceRoller
         #endregion
 
         #region PRIVATE_METHODS
+
+        private void RollDice()
+        {
+            OnDragFinished?.Invoke();
+            StartCoroutine(WaitForDiceToStop());
+        }
+
         private void SetupDiceSides(List<DiceSideData> diceSides)
         {
             for (int i = 0; i < diceSides.Count; i++)
@@ -63,7 +71,7 @@ namespace DiceRoller
 
         private IEnumerator WaitForDiceToStop()
         {
-            while (Rigidbody.velocity.magnitude > 0.1f && !IsDragged)
+            while (Rigidbody.velocity.magnitude > 0f && !IsDragged)
             {
                 yield return null;
             }
@@ -77,6 +85,7 @@ namespace DiceRoller
                 if (diceSide)
                 {
                     Debug.Log("Dice rolled: " + diceSide.SideValue);
+                    OnRollFinished?.Invoke(diceSide.SideValue);
                 }
                 else
                 {
@@ -100,6 +109,15 @@ namespace DiceRoller
                 diceSideData.diceSide = diceSides[i];
                 _diceSides.Add(diceSideData);
             }
+        }
+
+        public void FakeRollDice(float forceMagnitude)
+        {
+            Vector3 Direction = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1f), Random.Range(-1f, 1f)).normalized;
+            // Apply the force to the die's Rigidbody component
+            _rigidbody.AddForce(Direction * forceMagnitude, ForceMode.Impulse);
+            _rigidbody.AddTorque(Direction * forceMagnitude, ForceMode.Impulse);
+            RollDice();
         }
         #endregion
     }
