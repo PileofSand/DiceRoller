@@ -55,7 +55,9 @@ GameObject:
   - component: {fileID: 2743854184893336649}
   - component: {fileID: 2743854184895599237}
   - component: {fileID: 2743854184895599236}
-  - component: {fileID: 821886413}
+  - component: {fileID: 951116997}
+  - component: {fileID: 951117004}
+  - component: {fileID: 7044969483810220270}
   m_Layer: 0
   m_Name: TwelveSidedDie
   m_TagString: Untagged
@@ -153,7 +155,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &821886413
+--- !u!114 &951116997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,34 +164,79 @@ MonoBehaviour:
   m_GameObject: {fileID: 2743854184895599243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32c4b4898c3308344837066eac16c44a, type: 3}
+  m_Script: {fileID: 11500000, guid: 96beebc641366144cb2a0592c6875db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &951117004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743854184895599243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7a40e34952ebf428212b8e723abdeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
   - sideValue: 1
     diceSide: {fileID: 5543526079825952204}
+    AddDotSymbol: 0
   - sideValue: 2
     diceSide: {fileID: 6219052956436017035}
+    AddDotSymbol: 0
   - sideValue: 3
     diceSide: {fileID: 8009780432060256267}
+    AddDotSymbol: 0
   - sideValue: 4
     diceSide: {fileID: 3304262654520316258}
+    AddDotSymbol: 0
   - sideValue: 5
     diceSide: {fileID: 2887554054493597089}
+    AddDotSymbol: 0
   - sideValue: 6
     diceSide: {fileID: 1191400011388683019}
+    AddDotSymbol: 1
   - sideValue: 7
     diceSide: {fileID: 3936182941045232675}
+    AddDotSymbol: 0
   - sideValue: 8
     diceSide: {fileID: 6678207884977218084}
+    AddDotSymbol: 0
   - sideValue: 9
     diceSide: {fileID: 5095524491032538059}
+    AddDotSymbol: 1
   - sideValue: 10
     diceSide: {fileID: 7544648504210016649}
+    AddDotSymbol: 0
   - sideValue: 11
     diceSide: {fileID: 3638936052657002484}
+    AddDotSymbol: 0
   - sideValue: 12
     diceSide: {fileID: 3095887247252575155}
+    AddDotSymbol: 0
+  _fakeRollForce: 10
+  _minimumVelocityTreshhold: 6
+  _mouseDragSpeed: 0.5
+  _pickUpHeight: 12
+  _xMovementBounds: {x: -11, y: 8}
+  _zMovementBounds: {x: -8, y: 11}
+--- !u!114 &7044969483810220270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743854184895599243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef1174a167b9cd048945e51ccd84c021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 0}
+  _diceData: {fileID: 951117004}
+  _diceInput: {fileID: 951116997}
 --- !u!1001 &1534976849562558993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,6 +244,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,16 +309,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 5124318091040068543}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -277,15 +319,10 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 491088875697511770}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
@@ -332,6 +369,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -392,16 +434,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 8813147239102857686}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -412,18 +444,25 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 4288297813661798195}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
+--- !u!114 &8813147239102857686 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 2891029282990207096}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &69964716602634932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -448,18 +487,6 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 2891029282990207096}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8813147239102857686 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 2891029282990207096}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3303181064988757179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -467,6 +494,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -527,16 +559,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 9189358395463925013}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -547,18 +569,19 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 4488582882275947504}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
+--- !u!4 &374131870888660599 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 3303181064988757179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2887554054493597089 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 415992185811886362, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -589,12 +612,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &374131870888660599 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 3303181064988757179}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3401110230409491113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -602,6 +619,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -662,16 +684,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 9035138758312444679}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -682,24 +694,13 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 4372656901859986914}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
---- !u!4 &564433079407095909 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 3401110230409491113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &9035138758312444679 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -730,6 +731,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3f9683db0e3f34f9364d30cc5b5c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &564433079407095909 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 3401110230409491113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3703585311164724537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -737,6 +744,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -797,16 +809,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 7004696520087897239}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -817,42 +819,25 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 2375684826248546930}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
---- !u!4 &1982613455321495541 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 3703585311164724537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &2375684826248546930 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1413540897073102667, guid: 7dae01e586a8bca40b6db239be400a06,
     type: 3}
   m_PrefabInstance: {fileID: 3703585311164724537}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7004696520087897239 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+--- !u!4 &1982613455321495541 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
     type: 3}
   m_PrefabInstance: {fileID: 3703585311164724537}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3936182941045232675 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 415992185811886362, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -865,6 +850,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3f9683db0e3f34f9364d30cc5b5c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7004696520087897239 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 3703585311164724537}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3982870642262046446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -872,6 +869,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -932,16 +934,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 7283893825562380096}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -952,15 +944,10 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 2654898694492195237}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
@@ -1007,6 +994,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1067,16 +1059,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 1234970772804025215}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -1087,30 +1069,13 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 5831864389550781850}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
---- !u!114 &5095524491032538059 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 415992185811886362, guid: 7dae01e586a8bca40b6db239be400a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 4860252849967975121}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e3f9683db0e3f34f9364d30cc5b5c66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1234970772804025215 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -1123,15 +1088,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &5831864389550781850 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1413540897073102667, guid: 7dae01e586a8bca40b6db239be400a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 4860252849967975121}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7752235848432666653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 4860252849967975121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5095524491032538059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 415992185811886362, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 4860252849967975121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e3f9683db0e3f34f9364d30cc5b5c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!23 &5831864389550781850 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1413540897073102667, guid: 7dae01e586a8bca40b6db239be400a06,
     type: 3}
   m_PrefabInstance: {fileID: 4860252849967975121}
   m_PrefabAsset: {fileID: 0}
@@ -1142,6 +1119,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1197,28 +1179,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 415992185811886362, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
+      propertyPath: m_textMesh
+      value: 
+      objectReference: {fileID: 1980176743211117944}
+    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_textInfo.textComponent
+      value: 
+      objectReference: {fileID: 1980176743211117944}
+    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_renderer
+      value: 
+      objectReference: {fileID: 6536568992268755869}
     - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
+--- !u!23 &6536568992268755869 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1413540897073102667, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 5272423414244859094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1980176743211117944 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 5272423414244859094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7047296070540287514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -1244,6 +1244,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1304,16 +1309,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 133714281312239423}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -1324,24 +1319,25 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 4618022444992999898}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
---- !u!4 &8893776244866993245 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
+--- !u!114 &6219052956436017035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 415992185811886362, guid: 7dae01e586a8bca40b6db239be400a06,
     type: 3}
   m_PrefabInstance: {fileID: 6020016406090862225}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e3f9683db0e3f34f9364d30cc5b5c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &133714281312239423 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -1360,18 +1356,12 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 6020016406090862225}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6219052956436017035 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 415992185811886362, guid: 7dae01e586a8bca40b6db239be400a06,
+--- !u!4 &8893776244866993245 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
     type: 3}
   m_PrefabInstance: {fileID: 6020016406090862225}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e3f9683db0e3f34f9364d30cc5b5c66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6442438850192098110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1379,6 +1369,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1439,16 +1434,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 808481245354963600}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -1459,15 +1444,10 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 5401438784420527221}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
@@ -1514,6 +1494,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1574,16 +1559,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 4088700037384011967}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -1594,18 +1569,19 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 8750623375987248730}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
+--- !u!4 &4759175834743305181 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 7704975538199490833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &8750623375987248730 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1413540897073102667, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -1624,12 +1600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3f9683db0e3f34f9364d30cc5b5c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &4759175834743305181 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 7704975538199490833}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4088700037384011967 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -1649,6 +1619,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602885274}
     m_Modifications:
+    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceSide
+      objectReference: {fileID: 0}
     - target: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1709,16 +1684,6 @@ PrefabInstance:
       propertyPath: m_textMesh
       value: 
       objectReference: {fileID: 4550454282652735805}
-    - target: {fileID: 1924436641771126914, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Name
-      value: DiceSide
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
       propertyPath: m_textInfo.textComponent
@@ -1729,24 +1694,13 @@ PrefabInstance:
       propertyPath: m_renderer
       value: 
       objectReference: {fileID: 9145676782404261848}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
+    - target: {fileID: 7896063002672893458, guid: 7dae01e586a8bca40b6db239be400a06,
         type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931356606994510254, guid: 7dae01e586a8bca40b6db239be400a06,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dae01e586a8bca40b6db239be400a06, type: 3}
---- !u!23 &9145676782404261848 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1413540897073102667, guid: 7dae01e586a8bca40b6db239be400a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 7887526324631840915}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7544648504210016649 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 415992185811886362, guid: 7dae01e586a8bca40b6db239be400a06,
@@ -1762,6 +1716,12 @@ MonoBehaviour:
 --- !u!4 &5012629797796457055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2947165435143586508, guid: 7dae01e586a8bca40b6db239be400a06,
+    type: 3}
+  m_PrefabInstance: {fileID: 7887526324631840915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &9145676782404261848 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1413540897073102667, guid: 7dae01e586a8bca40b6db239be400a06,
     type: 3}
   m_PrefabInstance: {fileID: 7887526324631840915}
   m_PrefabAsset: {fileID: 0}

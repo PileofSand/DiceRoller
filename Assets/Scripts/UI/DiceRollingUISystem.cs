@@ -15,7 +15,7 @@ namespace DiceRoller.UI
         [SerializeField]
         private Button _button;
         [SerializeField]
-        private DiceRollingSystem _diceRollingSystem;
+        private DiceController _diceController;
 
         private int _sumValue;
         #endregion
@@ -25,14 +25,14 @@ namespace DiceRoller.UI
         private void Start()
         {
             _button.onClick.AddListener(() => SetupRollButton());
-            _diceRollingSystem.OnRollStarted += RollStarted;
-            _diceRollingSystem.OnRollFinished += RollFinished;
+            _diceController.OnRollStarted += RollStarted;
+            _diceController.OnRollFinished += RollFinished;
         }
 
         private void OnDestroy()
         {
-            _diceRollingSystem.OnRollStarted -= RollStarted;
-            _diceRollingSystem.OnRollFinished -= RollFinished;
+            _diceController.OnRollStarted -= RollStarted;
+            _diceController.OnRollFinished -= RollFinished;
         }
 
         #endregion
@@ -41,7 +41,7 @@ namespace DiceRoller.UI
         
         private void SetupRollButton()
         {
-            _diceRollingSystem.FakeRollDice();
+            _diceController.FakeRollDice();
         }
 
         private void RollFinished(int value)

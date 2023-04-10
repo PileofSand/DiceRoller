@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace DiceRoller
 {
-    public class Draggable : MonoBehaviour
+    public class DiceInput : MonoBehaviour
     {
         #region ACTIONS
         public Action OnDragStarted;
