@@ -21,6 +21,8 @@ namespace DiceRoller
         private Camera _mainCamera;
         [SerializeField, Tooltip("Force of fake rolling (Button)")]
         private float _fakeRollForce = 10f;
+        [SerializeField, Tooltip("Force of fake rolling (Button)")]
+        private float _minimumVelocityTreshhold = 1f;
         [SerializeField, Tooltip("Speed multiplier for the dragging, used on object.")]
         private float _mouseDragSpeed = 0.5f;
         [SerializeField, Tooltip("Value used to boost throw speed, Set to [1] to use realistic physics")]
@@ -90,7 +92,7 @@ namespace DiceRoller
                 return _isFakeRolling;
             }
 
-            Vector3 Direction = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1f), Random.Range(-1f, 1f)).normalized;
+            Vector3 Direction = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 0.5f), Random.Range(-1f, 1f)).normalized;
             // Apply the force to the die's Rigidbody component
             _dice.Rigidbody.velocity = Direction * _fakeRollForce;
             StartCoroutine(WaitForDiceToStop());
@@ -128,8 +130,17 @@ namespace DiceRoller
         private void DragFinished()
         {
             _dice.Rigidbody.useGravity = true;
-            _dice.Rigidbody.velocity = _velocity * _throwAccelerationValue;
-            StartCoroutine(WaitForDiceToStop());
+            if (_velocity.magnitude > _minimumVelocityTreshhold)
+            {
+                _dice.Rigidbody.velocity = _velocity * _throwAccelerationValue;
+                StartCoroutine(WaitForDiceToStop());
+            }
+            else
+            {
+                _dice.Rigidbody.velocity = Vector3.zero;
+                _dice.Rigidbody.angularVelocity = Vector3.zero;
+            }
+                
             OnRollStarted?.Invoke();
         }
 
@@ -137,6 +148,7 @@ namespace DiceRoller
         {
             _dice.Rigidbody.useGravity = false;
             _dice.Rigidbody.velocity = Vector3.zero;
+            _dice.Rigidbody.angularVelocity = Vector3.zero;
             _dice.transform.Translate(Vector3.up * _pickUpHeight * _pickUpSpeed);
         }
         #endregion

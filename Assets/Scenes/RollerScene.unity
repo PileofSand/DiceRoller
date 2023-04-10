@@ -2131,6 +2131,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: DiceRollingSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
+        type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 534669904}
+    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
+        type: 3}
+      propertyPath: _xMovementBounds.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
+        type: 3}
+      propertyPath: _zMovementBounds.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
+        type: 3}
+      propertyPath: _zMovementBounds.y
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
+        type: 3}
+      propertyPath: _xMovementBounds.x
+      value: -11
+      objectReference: {fileID: 0}
     - target: {fileID: 6776212385349985066, guid: 2d323fd26a4c28c45adf18163592e28f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2185,31 +2210,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
-        type: 3}
-      propertyPath: _mainCamera
-      value: 
-      objectReference: {fileID: 534669904}
-    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
-        type: 3}
-      propertyPath: _xMovementBounds.y
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
-        type: 3}
-      propertyPath: _zMovementBounds.x
-      value: -8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
-        type: 3}
-      propertyPath: _zMovementBounds.y
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776212385349985065, guid: 2d323fd26a4c28c45adf18163592e28f,
-        type: 3}
-      propertyPath: _xMovementBounds.x
-      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 3558038502038072345, guid: 2d323fd26a4c28c45adf18163592e28f,
         type: 3}
@@ -2770,6 +2770,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558038502038040631, guid: 2d323fd26a4c28c45adf18163592e28f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558038502038040631, guid: 2d323fd26a4c28c45adf18163592e28f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558038502038040631, guid: 2d323fd26a4c28c45adf18163592e28f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d323fd26a4c28c45adf18163592e28f, type: 3}
