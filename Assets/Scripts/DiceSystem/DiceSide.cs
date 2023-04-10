@@ -9,7 +9,7 @@ namespace DiceRoller
         [SerializeField]
         private TextMeshPro m_textMesh;
 
-        public string SideValue { get; set; }
+        public int SideValue { get; set; }
 
         #region UNITY_METHODS
         private void Awake()
@@ -19,10 +19,21 @@ namespace DiceRoller
         #endregion
 
         #region PUBLIC_METHODS
-        public void Setup(string value)
+        public void Setup(int value, bool addDotSymbol)
         {
             SideValue = value;
-            m_textMesh.text = value;
+            string displayValue;
+
+            if (addDotSymbol)
+            {
+                displayValue = value + ".";
+            }
+            else
+            {
+                displayValue = value.ToString();
+            }
+
+            m_textMesh.text = displayValue;
         }
         #endregion
     }

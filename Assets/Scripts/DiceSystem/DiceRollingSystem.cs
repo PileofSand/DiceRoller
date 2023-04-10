@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
@@ -10,7 +9,7 @@ namespace DiceRoller
     public class DiceRollingSystem : MonoBehaviour
     {
         #region ACTIONS
-        public Action<string> OnRollFinished;
+        public Action<int> OnRollFinished;
         public Action OnRollStarted;
         #endregion
 
@@ -21,7 +20,7 @@ namespace DiceRoller
         private Camera _mainCamera;
         [SerializeField, Tooltip("Force of fake rolling (Button)")]
         private float _fakeRollForce = 10f;
-        [SerializeField, Tooltip("Force of fake rolling (Button)")]
+        [SerializeField, Tooltip("Minimum velocity, for throw to be random")]
         private float _minimumVelocityTreshhold = 1f;
         [SerializeField, Tooltip("Speed multiplier for the dragging, used on object.")]
         private float _mouseDragSpeed = 0.5f;
@@ -36,8 +35,8 @@ namespace DiceRoller
         [SerializeField, Tooltip("Bounds for Dice movement on Z axis")]
         private Vector2 _zMovementBounds;
 
-
-        private bool _isFakeRolling;
+        private bool _isRolling;
+        private bool _isDragged;
         private Vector3 _velocity;
         private Plane _plane;
         #endregion
@@ -65,7 +64,7 @@ namespace DiceRoller
 
         private void FixedUpdate()
         {
-            if (!_dice.IsDragged)
+            if (!_isDragged)
             {
                 return;
             }
@@ -74,42 +73,44 @@ namespace DiceRoller
             if (_plane.Raycast(ray, out float initialDistance))
             {
                 Vector3 dragPosition = ray.GetPoint(initialDistance);
-                Vector3 clampedTargetPos = new Vector3(
-        Mathf.Clamp(dragPosition.x, _xMovementBounds.x, _xMovementBounds.y),
-        _dice.transform.position.y,
-        Mathf.Clamp(dragPosition.z, _zMovementBounds.x, _zMovementBounds.y));
-        
+                Vector3 clampedTargetPos = GetClampedPosition(dragPosition);
                 _dice.transform.position = Vector3.SmoothDamp(_dice.transform.position, clampedTargetPos, ref _velocity, _mouseDragSpeed);
             }
         }
         #endregion
 
         #region PUBLIC_METHODS
-        public bool FakeRollDice()
+        /// <summary>
+        /// Method used to roll a dice by UI Button.
+        /// </summary>
+        public void FakeRollDice()
         {
-            if (_isFakeRolling)
+            if (_isRolling)
             {
-                return _isFakeRolling;
+                return;
             }
 
             Vector3 Direction = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 0.5f), Random.Range(-1f, 1f)).normalized;
-            // Apply the force to the die's Rigidbody component
             _dice.Rigidbody.velocity = Direction * _fakeRollForce;
             StartCoroutine(WaitForDiceToStop());
             OnRollStarted?.Invoke();
-            return _isFakeRolling;
         }
         #endregion
 
         #region PRIVATE_METHODS
+        /// <summary>
+        /// Corutine used to wait for dice to stop moving before reading upper side value.
+        /// </summary>
         private IEnumerator WaitForDiceToStop()
         {
-            _isFakeRolling = true;
-            while (_dice.Rigidbody.velocity.magnitude > 0f && !_dice.IsDragged)
+            _isRolling = true;
+
+            while (_dice.Rigidbody.velocity.magnitude > 0f && !_isDragged)
             {
                 yield return null;
             }
-            _isFakeRolling = false;
+
+            _isRolling = false;
             // Cast a ray downwards from the center of the dice to detect which side is facing up
             RaycastHit hit;
             if (Physics.Raycast(_dice.transform.position, Vector3.up, out hit))
@@ -127,9 +128,27 @@ namespace DiceRoller
             }
         }
 
+        /// <summary>
+        /// Getting clamped bounds where user can move dice with mouse.
+        /// </summary>
+        private Vector3 GetClampedPosition(Vector3 dragPosition)
+        {
+            return new Vector3(
+            Mathf.Clamp(dragPosition.x, _xMovementBounds.x, _xMovementBounds.y),
+            Mathf.Clamp(dragPosition.y, 0, _pickUpHeight),
+            Mathf.Clamp(dragPosition.z, _zMovementBounds.x, _zMovementBounds.y));
+        }
+
         private void DragFinished()
         {
+            if (_isRolling)
+            {
+                return;
+            }
+
+            _isDragged = false;
             _dice.Rigidbody.useGravity = true;
+            //Check if velocity is higher than minimum treshhold to proper throw.
             if (_velocity.magnitude > _minimumVelocityTreshhold)
             {
                 _dice.Rigidbody.velocity = _velocity * _throwAccelerationValue;
@@ -137,19 +156,28 @@ namespace DiceRoller
             }
             else
             {
-                _dice.Rigidbody.velocity = Vector3.zero;
-                _dice.Rigidbody.angularVelocity = Vector3.zero;
+                ResetDicePhysics();
             }
-                
+
             OnRollStarted?.Invoke();
+        }
+
+        private void ResetDicePhysics()
+        {
+            _dice.Rigidbody.velocity = Vector3.zero;
+            _dice.Rigidbody.angularVelocity = Vector3.zero;
         }
 
         private void DragStarted()
         {
+            if (_isRolling)
+            {
+                return;
+            }
+
+            _isDragged = true;
             _dice.Rigidbody.useGravity = false;
-            _dice.Rigidbody.velocity = Vector3.zero;
-            _dice.Rigidbody.angularVelocity = Vector3.zero;
-            _dice.transform.Translate(Vector3.up * _pickUpHeight * _pickUpSpeed);
+            ResetDicePhysics();
         }
         #endregion
     }

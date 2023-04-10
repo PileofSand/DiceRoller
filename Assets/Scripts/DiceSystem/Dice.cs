@@ -24,16 +24,22 @@ namespace DiceRoller
 
         #region UNITY_METHODS
         // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
             Assert.IsNotNull(_diceSides);
             _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void Start()
+        {
             SetupDiceSides(_diceSides);
         }
         #endregion
 
         #region PUBLIC_METHODS
-        //Context menu method used to gather all dice side datas into list.
+        /// <summary>
+        /// Method used in inpector context menu to gather all dice sides into a list.
+        /// </summary>
         [ContextMenu("Gather Dice Sides")]
         public void GatherDiceSides()
         {
@@ -42,7 +48,7 @@ namespace DiceRoller
             for (int i = 0; i < diceSides.Length; i++)
             {
                 DiceSideData diceSideData = new DiceSideData();
-                diceSideData.sideValue = (i + 1).ToString();
+                diceSideData.sideValue = (i + 1);
                 diceSideData.diceSide = diceSides[i];
                 _diceSides.Add(diceSideData);
             }
@@ -54,7 +60,15 @@ namespace DiceRoller
         {
             for (int i = 0; i < diceSides.Count; i++)
             {
-                diceSides[i].diceSide.Setup(diceSides[i].sideValue);
+                DiceSideData diceSideData = diceSides[i];
+                if (diceSideData.AddDotSymbol)
+                {
+                    diceSideData.diceSide.Setup(diceSideData.sideValue, true );
+                }
+                else
+                {
+                    diceSideData.diceSide.Setup(diceSideData.sideValue, false);
+                }
             }
         }
         #endregion

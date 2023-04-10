@@ -44,16 +44,10 @@ namespace DiceRoller.UI
             _diceRollingSystem.FakeRollDice();
         }
 
-        private void RollFinished(string value)
+        private void RollFinished(int value)
         {
-            if (value.Contains("."))
-            {
-                value = value.Replace(".", "");
-            }
-
-            int addValue = int.Parse(value);
-            _sumValue += addValue;
-            _textField.text = addValue.ToString();
+            _sumValue += value;
+            _textField.text = value.ToString();
             _sumTextField.text = _sumValue.ToString();
             _button.interactable = true;
         }
