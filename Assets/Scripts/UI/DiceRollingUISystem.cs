@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Globalization;
+
 
 namespace DiceRoller.UI
 {
@@ -21,7 +21,6 @@ namespace DiceRoller.UI
         #endregion
 
         #region UNITY_METHODS
-
         private void Start()
         {
             _button.onClick.AddListener(() => SetupRollButton());
@@ -34,11 +33,9 @@ namespace DiceRoller.UI
             _diceController.OnRollStarted -= RollStarted;
             _diceController.OnRollFinished -= RollFinished;
         }
-
         #endregion
 
         #region PRIVATE_METHODS  
-        
         private void SetupRollButton()
         {
             _diceController.FakeRollDice();

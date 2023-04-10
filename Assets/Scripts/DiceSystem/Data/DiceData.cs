@@ -13,6 +13,8 @@ namespace DiceRoller
         private float _fakeRollForce = 10f;
         [SerializeField, Tooltip("Minimum velocity, for throw to be random")]
         private float _minimumVelocityTreshhold = 1f;
+        [SerializeField, Tooltip("Time in which it should be put back if not rolled properly")]
+        private float _returnDiceTime = 1f;
         [SerializeField, Tooltip("Speed multiplier for the dragging, used on object.")]
         private float _mouseDragSpeed = 0.5f;
         [SerializeField, Tooltip("Height of dice when picking it up")]
@@ -28,6 +30,7 @@ namespace DiceRoller
         public float MinimumVelocityTreshhold => _minimumVelocityTreshhold;
         public float MouseDragSpeed => _mouseDragSpeed;
         public float FakeRollForce => _fakeRollForce;
+        public float ReturnDiceTime => _returnDiceTime;
         public Plane Plane => _plane;
         public Rigidbody Rigidbody => _rigidbody;
         #endregion

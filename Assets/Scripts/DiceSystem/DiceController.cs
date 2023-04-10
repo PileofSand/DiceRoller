@@ -25,6 +25,8 @@ namespace DiceRoller
         private bool _isRolling;
         private bool _isDragged;
         private Vector3 _velocity;
+        private Vector3 _pickUpPosition;
+        private Quaternion _pickUpRotation;
         #endregion
 
         #region UNITY_METHODS
@@ -98,13 +100,13 @@ namespace DiceRoller
             {
                 _diceData.Rigidbody.velocity = _velocity;
                 StartCoroutine(WaitForDiceToStop());
+                OnRollStarted?.Invoke();
             }
             else
             {
+                StartCoroutine(ReturnDice(_pickUpPosition, _pickUpRotation, _diceData.ReturnDiceTime));
                 _diceData.ResetDicePhysics();
             }
-
-            OnRollStarted?.Invoke();
         }
 
         private void DragStarted()
@@ -113,6 +115,8 @@ namespace DiceRoller
             {
                 return;
             }
+            _pickUpPosition = transform.position;
+            _pickUpRotation = transform.rotation;
 
             _isDragged = true;
             _diceData.Rigidbody.useGravity = false;
@@ -147,6 +151,31 @@ namespace DiceRoller
                     Debug.Log("No Side Detected");
                 }
             }
+        }
+
+        /// <summary>
+        /// Corutine used to move dice back to pickUp spot if velocity wasn't high enough to roll it properly.
+        /// </summary>
+        IEnumerator ReturnDice(Vector3 targetPosition, Quaternion targetRotation, float duration)
+        {
+            Vector3 startPosition = transform.position;
+            Quaternion startRotation = transform.rotation;
+
+            float time = 0f;
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+
+                float t = Mathf.Clamp01(time / duration);
+                transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+                transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+
+                yield return null;
+            }
+            _isRolling = false;
+            
+            transform.position = targetPosition;
+            transform.rotation = targetRotation;
         }
         #endregion
     }
